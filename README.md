@@ -9,19 +9,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 * install `@angular/fire` (note: `angularfire2` is deprecated)  
 `npm i @angular/fire --save`  
 * imports to app.module.ts 
-`
-import {AngularFireModule} from '@angular/fire';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {AngularFireAuthModule} from '@angular/fire/auth';
-...
-  imports: [
-    ...
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule
-  ]
-
-`
 
 
 ## Code scaffolding
