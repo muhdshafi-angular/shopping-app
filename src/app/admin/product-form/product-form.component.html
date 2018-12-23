@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-md-6">
+            <form #f="ngForm" (ngSubmit)="save(f.value)">
+                    <div class="form-group">
+                        <label for="title" for="">Title</label>
+                        <input  [(ngModel)] = "product.title" 
+                                name="title" 
+                                id="title" 
+                                type="text" 
+                                class="form-control"
+                                required
+                                #titleTV="ngModel">
+                        <div class="alert alert-danger" *ngIf="titleTV.touched && titleTV.invalid">
+                            <div *ngIf="titleTV.errors.required">Title is required</div>
+                        </div>        
+                    </div>
+                    <div class="form-group">
+                        <label for="price" for="">Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input  [(ngModel)] = "product.price" 
+                                    name="price" 
+                                    id="price" 
+                                    type="number" 
+                                    class="form-control"
+                                    required
+                                    [min] = "0"
+                                    #priceTV="ngModel">            
+                        </div>
+                        <div class="alert alert-danger" *ngIf="priceTV.touched && priceTV.invalid">
+                            <div *ngIf="priceTV.errors.required">Price is required</div>
+                            <div *ngIf="priceTV.errors.min">Price should be 0 or above</div>
+                        </div>   
+                    </div>
+                    <div class="form-group">
+                        <label for="category" for="">Category</label>
+                        <select     [(ngModel)] = "product.category" 
+                                    name="category" 
+                                    id="category" 
+                                    class="form-control"
+                                    required
+                                    #categoryTV="ngModel">                   
+                            <option value="" ></option>
+                            <option *ngFor="let category of categories$ | async" [value]="category.name" >{{category.name}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="categoryTV.touched && categoryTV.invalid">
+                            <div *ngIf="categoryTV.errors.required">Category is required</div>
+                        </div> 
+                    </div>    
+                    <div class="form-group">
+                        <label for="image" for="">Image URL</label>
+                        <input  [(ngModel)] = "product.image"  
+                                name="image" 
+                                id="image" 
+                                type="text" 
+                                class="form-control"
+                                required
+                                url
+                                #imageTV="ngModel">
+                        <div class="alert alert-danger" *ngIf="imageTV.touched && imageTV.invalid">
+                             <div *ngIf="imageTV.errors.required">Image URL is required</div>
+                             <div *ngIf="imageTV.errors.url">Please enter valid URL</div>
+                       </div>          
+                    </div>
+                    <button class="btn btn-primary">Save</button>
+                    <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+                </form>
+    </div>
+    <div class="col-md-6">
+            <app-product-card [product]="product" [show-actions]="false"></app-product-card>
+    </div>
+</div>
+
+
